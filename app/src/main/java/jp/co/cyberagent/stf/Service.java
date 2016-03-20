@@ -4,7 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.*;
+import android.os.IBinder;
 import android.os.Process;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -44,13 +44,15 @@ import jp.co.cyberagent.stf.query.GetPropertiesResponder;
 import jp.co.cyberagent.stf.query.GetRingerModeResponder;
 import jp.co.cyberagent.stf.query.GetSdStatusResponder;
 import jp.co.cyberagent.stf.query.GetVersionResponder;
+import jp.co.cyberagent.stf.query.GetWhiteListResponder;
+import jp.co.cyberagent.stf.query.GetWifiStatusResponder;
 import jp.co.cyberagent.stf.query.SetClipboardResponder;
 import jp.co.cyberagent.stf.query.SetKeyguardStateResponder;
 import jp.co.cyberagent.stf.query.SetMasterMuteResponder;
 import jp.co.cyberagent.stf.query.SetRingerModeResponder;
 import jp.co.cyberagent.stf.query.SetWakeLockResponder;
+import jp.co.cyberagent.stf.query.SetWhiteListResponder;
 import jp.co.cyberagent.stf.query.SetWifiEnabledResponder;
-import jp.co.cyberagent.stf.query.GetWifiStatusResponder;
 
 public class Service extends android.app.Service {
     public static final String ACTION_START = "jp.co.cyberagent.stf.ACTION_START";
@@ -295,6 +297,9 @@ public class Service extends android.app.Service {
                     router.register(Wire.MessageType.GET_CLIPBOARD,
                             new GetClipboardResponder(getBaseContext()));
 
+                    router.register(Wire.MessageType.GET_WHITELIST,
+                            new GetWhiteListResponder(getBaseContext()));
+
                     router.register(Wire.MessageType.GET_DISPLAY,
                             new GetDisplayResponder(getBaseContext()));
 
@@ -315,6 +320,9 @@ public class Service extends android.app.Service {
 
                     router.register(Wire.MessageType.SET_CLIPBOARD,
                             new SetClipboardResponder(getBaseContext()));
+
+                    router.register(Wire.MessageType.SET_WHITELIST,
+                            new SetWhiteListResponder(getBaseContext()));
 
                     router.register(Wire.MessageType.SET_KEYGUARD_STATE,
                             new SetKeyguardStateResponder(getBaseContext()));
