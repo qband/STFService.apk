@@ -4,6 +4,9 @@ init:
 release:
 	./gradlew assembleRelease
 
+install:
+	adb install app/build/outputs/apk/app-release.apk
+
 deploy:
 	scripts/deploy.sh
 
